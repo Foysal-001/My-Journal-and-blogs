@@ -1,0 +1,112 @@
+/* styles.css */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1e1e1e;
+  color: white;
+}
+
+nav h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+
+nav ul li a:hover {
+  color: #f39c12;
+}
+
+main {
+  padding: 2rem;
+}
+
+/* Content Sections */
+.content-section {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease-in-out, height 0.4s ease-in-out, visibility 0.4s;
+}
+
+.content-section.active {
+  opacity: 1;
+  visibility: visible;
+  height: auto;
+}
+
+/* Blog List */
+.blog-list {
+  list-style: none;
+  padding: 0;
+}
+
+.blog-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.blog-list li a {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Story / Blog Content inside sections */
+.story-content {
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease-in-out, max-height 0.4s ease-in-out, visibility 0.4s;
+  margin-top: 1rem;
+  padding: 0 1rem;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.story-content.active {
+  opacity: 1;
+  visibility: visible;
+  max-height: 1000px; /* enough to show content */
+  padding: 1rem;
+}
+
+/* Theme Colors */
+.theme-stories {
+  background-color: #fef6f0;
+  color: #3e3e3e;
+}
+
+.theme-travel {
+  background-color: #f0f9f7;
+  color: #2e4d44;
+}
+
+.theme-tech {
+  background-color: #f3f4f6;
+  color: #1a1a1a;
+}
