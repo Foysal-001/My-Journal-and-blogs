@@ -12,4 +12,4 @@ Welcome to my personal blog website repository! This porject is a minimalistic a
 
 Languages used: HTML, CSS, JavaScript
 
-Live Link: 
+Live Link: https://foysal-001.github.io/My-Journal-and-blogs/
