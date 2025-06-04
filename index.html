@@ -115,20 +115,28 @@ function showBlog(id) {
   });
 }
 function loadBlog(fileName, containerId) {
-  console.log('Trying to load:', fileName);
   fetch(fileName)
     .then(response => {
-      if (!response.ok) throw new Error("File not found");
+      if (!response.ok) {
+        throw new Error("File not found");
+      }
       return response.text();
     })
     .then(text => {
-      document.getElementById(containerId).innerHTML = `<p>${text.replace(/\n/g, '<br>')}</p>`;
+      const container = document.getElementById(containerId);
+      container.innerHTML = `<p>${text.replace(/\n/g, '<br>')}</p>`;
+      container.classList.remove('hidden');
+      container.classList.add('active');
     })
     .catch(err => {
-      document.getElementById(containerId).innerHTML = "<p>Unable to load blog content.</p>";
+      const container = document.getElementById(containerId);
+      container.innerHTML = "<p>Unable to load blog content.</p>";
+      container.classList.remove('hidden');
+      container.classList.add('active');
       console.error(err);
     });
 }
+
 
 
   </script>
