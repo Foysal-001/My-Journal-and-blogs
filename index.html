@@ -10,105 +10,126 @@
   <nav>
     <h1>GRIDFALL__</h1>
     <ul>
-      <li><a href="#" onclick="switchSection('stories', 'theme-stories')">Stories</a></li>
-      <li><a href="#" onclick="switchSection('travel', 'theme-travel')">Travel Blogs</a></li>
-      <li><a href="#" onclick="switchSection('tech', 'theme-tech')">Tech Diaries</a></li>
+      <li><a href="#" onclick="switchSection('stories')">Stories</a></li>
+      <li><a href="#" onclick="switchSection('travel')">Travel Blogs</a></li>
+      <li><a href="#" onclick="switchSection('tech')">Tech Diaries</a></li>
     </ul>
   </nav>
 
   <main>
-    <section id="stories" class="content-section">
-      <h2>Stories</h2>
-      <ul class="blog-list">
-        <li>
-          <a href="#" onclick="loadBlog('The Haunted Alley.txt', 'story-display')">The Haunted Alley</a>
-        </li>
-        <li>
-          <a href="#" onclick="loadBlog('Dreams of the Forgotten.txt', 'story-display')">Dreams of the Forgotten</a>
-        </li>
-      </ul>
-      <div id="story-display" class="story-content">
-        <p>Click on a story to load the content here.</p>
+<section id="stories" class="content-section active">
+  <h2>Stories</h2>
+  <ul class="blog-list">
+    <li>
+      <a href="#" onclick="loadBlog('The Haunted Alley.txt', 'story-display')">The Haunted Alley</a>
+     </li> 
+        
+
+    <li>
+      <a href="#" onclick="loadBlog('Dreams of the Forgotten.txt', 'story-display')">Dreams of the Forgotten</a>
+      
+    </li>
+  </ul>
+  <div id="story-display" class="story-content">
+  <p>Click on a story to load the content here.</p>
+</div>
+</section>
+
+
+<section id="travel" class="content-section hidden">
+  <h2>Travel Blogs</h2>
+  <ul class="blog-list">
+    <li>
+      <a href="#" onclick="showBlog('travel-sajek')">Sajek: Where the Clouds Sleep</a>
+      <div id="travel-sajek" class="story-content hidden">
+        <p>A misty sunrise over green valleys, Sajek is not just a place—it’s a breath of stillness...</p>
+        <p>...More content coming soon.</p>
       </div>
-    </section>
+    </li>
+    <li>
+      <a href="#" onclick="showBlog('travel-sundarbans')">Into the Mangroves: Sundarbans Diary</a>
+      <div id="travel-sundarbans" class="story-content hidden">
+        <p>The silence was alive in the world’s largest delta, where tigers watch from shadows...</p>
+        <p>...More content coming soon.</p>
+      </div>
+    </li>
+  </ul>
+</section>
 
-    <section id="travel" class="content-section hidden">
-      <h2>Travel Blogs</h2>
-      <ul class="blog-list">
-        <li>
-          <a href="#" onclick="showBlog('travel-sajek')">Sajek: Where the Clouds Sleep</a>
-          <div id="travel-sajek" class="story-content hidden">
-            <p>A misty sunrise over green valleys, Sajek is not just a place—it’s a breath of stillness...</p>
-            <p>...More content coming soon.</p>
-          </div>
-        </li>
-        <li>
-          <a href="#" onclick="showBlog('travel-sundarbans')">Into the Mangroves: Sundarbans Diary</a>
-          <div id="travel-sundarbans" class="story-content hidden">
-            <p>The silence was alive in the world’s largest delta, where tigers watch from shadows...</p>
-            <p>...More content coming soon.</p>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <section id="tech" class="content-section hidden">
-      <h2>Tech Diaries</h2>
-      <ul class="blog-list">
-        <li>
-          <a href="#" onclick="showBlog('tech-linux')">Linux and the Art of Simplicity</a>
-          <div id="tech-linux" class="story-content hidden">
-            <p>It began with a black terminal and a blinking cursor. I never thought this rabbit hole...</p>
-            <p>...More content coming soon.</p>
-          </div>
-        </li>
-        <li>
-          <a href="#" onclick="showBlog('tech-nightcoding')">Why I Code Better at 2AM</a>
-          <div id="tech-nightcoding" class="story-content hidden">
-            <p>The night holds a quiet rhythm. When the world sleeps, the code flows like poetry...</p>
-            <p>...More content coming soon.</p>
-          </div>
-        </li>
-      </ul>
-    </section>
+<section id="tech" class="content-section hidden">
+  <h2>Tech Diaries</h2>
+  <ul class="blog-list">
+    <li>
+      <a href="#" onclick="showBlog('tech-linux')">Linux and the Art of Simplicity</a>
+      <div id="tech-linux" class="story-content hidden">
+        <p>It began with a black terminal and a blinking cursor. I never thought this rabbit hole...</p>
+        <p>...More content coming soon.</p>
+      </div>
+    </li>
+    <li>
+      <a href="#" onclick="showBlog('tech-nightcoding')">Why I Code Better at 2AM</a>
+      <div id="tech-nightcoding" class="story-content hidden">
+        <p>The night holds a quiet rhythm. When the world sleeps, the code flows like poetry...</p>
+        <p>...More content coming soon.</p>
+      </div>
+    </li>
+  </ul>
+</section>
   </main>
 
   <script>
-    function switchSection(sectionId, themeClass) {
-      const sections = document.querySelectorAll('.content-section');
-      sections.forEach(sec => sec.classList.add('hidden'));
+  
+const sections = document.querySelectorAll('.content-section');
 
-      document.getElementById(sectionId).classList.remove('hidden');
-
-      document.body.className = '';
-      document.body.classList.add(themeClass);
+function switchSection(sectionId) {
+  sections.forEach(section => {
+    if (section.id === sectionId) {
+      section.classList.add('active');
+    } else {
+      section.classList.remove('active');
     }
+  });
+  
+  // Update body theme classes as before
+  document.body.className = document.body.className.replace(/\btheme-\S+/g, '');
+  document.body.classList.add(`theme-${sectionId}`);
+}
 
-    function loadBlog(fileName, containerId) {
-      fetch(fileName)
-        .then(response => {
-          if (!response.ok) throw new Error("File not found");
-          return response.text();
-        })
-        .then(text => {
-          document.getElementById(containerId).innerHTML = `<p>${text.replace(/\n/g, '<br>')}</p>`;
-        })
-        .catch(err => {
-          document.getElementById(containerId).innerHTML = "<p>Unable to load blog content.</p>";
-          console.error(err);
-        });
+function showStory(id) {
+  document.querySelectorAll('.story-content').forEach(div => {
+    if (div.id === id) {
+      div.classList.add('active');
+    } else {
+      div.classList.remove('active');
     }
+  });
+}
 
-    function showBlog(blogId) {
-      const blogs = document.querySelectorAll('.story-content');
-      blogs.forEach(blog => blog.classList.add('hidden'));
-      document.getElementById(blogId).classList.remove('hidden');
+function showBlog(id) {
+  document.querySelectorAll('.story-content').forEach(div => {
+    if (div.id === id) {
+      div.classList.add('active');
+    } else {
+      div.classList.remove('active');
     }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      switchSection('stories', 'theme-stories');
-      loadBlog('the-haunted-alley.txt', 'story-display');
+  });
+}
+function loadBlog(fileName, containerId) {
+  fetch(fileName)
+    .then(response => {
+      if (!response.ok) throw new Error("File not found");
+      return response.text();
+    })
+    .then(text => {
+      document.getElementById(containerId).innerHTML = `<p>${text.replace(/\n/g, '<br>')}</p>`;
+    })
+    .catch(err => {
+      document.getElementById(containerId).innerHTML = "<p>Unable to load blog content.</p>";
+      console.error(err);
     });
+}
+
+
   </script>
 </body>
 </html>
