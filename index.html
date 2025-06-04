@@ -115,6 +115,7 @@ function showBlog(id) {
   });
 }
 function loadBlog(fileName, containerId) {
+  console.log('Trying to load:', fileName);
   fetch(fileName)
     .then(response => {
       if (!response.ok) throw new Error("File not found");
